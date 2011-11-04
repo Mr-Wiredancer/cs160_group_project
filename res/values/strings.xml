@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, mainActivity!</string>
+    <string name="app_name">main</string>
+    <string name="quit_label">Quit</string> 
+    <string name="quit_title">quit</string> 
+    <string name="quit_shortcut">q</string> 
+    <string name="go_task_view_label">View my tasks</string> 
+    <string name="go_task_view_title">view task</string> 
+    <string name="go_task_view_shortcut">t</string>
+</resources>

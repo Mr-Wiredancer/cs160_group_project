@@ -2,6 +2,7 @@ package edu.cs160;
 
 import java.util.LinkedList;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,6 +15,35 @@ public class DatabaseDataHelper {
 		db=database;
 		dbr=db.getReadableDatabase();
 		dbw=db.getWritableDatabase();
+	}
+	
+	public void addNewTask(String title, String description, String date_created, String date_started, String date_due){
+		ContentValues cv=new ContentValues();
+		cv.put("title", title);
+		cv.put("description", description);
+		cv.put("date_created",date_created);
+		cv.put("date_started", date_started);
+		cv.put("date_due", date_due);
+		dbw.insert("tasks", null, cv);
+	}
+	
+	public void addNewTag(String name){
+		ContentValues cv = new ContentValues();
+		cv.put("name", name);
+		dbw.insert("tags", null,cv);
+	}
+	
+	public void addTagForTask(int tag_id, int task_id){
+		ContentValues cv = new ContentValues();
+		cv.put("task_id", task_id);
+		cv.put("tag_id", tag_id);
+		dbw.insert("tag_task", null, cv);
+	}
+	
+	public void addNewPlant(String name){
+		ContentValues cv=new ContentValues();
+		cv.put("name", name);
+		dbw.insert("plants", null,cv);
 	}
 	
 	//get all the tasks in the database;

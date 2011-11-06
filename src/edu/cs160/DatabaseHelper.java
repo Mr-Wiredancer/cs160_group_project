@@ -21,63 +21,38 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db){
 		
-		//For now the data in the database are hard-coded;
+		/*
+		 * Main table: tasks and plants
+		 * Helper table: reminders, repeats, resources, tags, tag_tasks, stages, locations 
+		 */
+		//task has title, description, date_time_created, date_time_finished, repeat_id, reminder_id, tag_task_id, resource_id
+		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_time_created TEXT, date_time_finished TEXT, repeat_id INTEGER, reminder_id INTEGER, tag_task_id INTEGER, resouce_id INTEGER);");
+		//a plant has name, plant_type_id, location_id, stage_id, resource_id
+		db.execSQL("CREATE TABLE plants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, plant_type_id INTEGER, location_id INTEGER, stage_id INTEGER, resource_id INTEGER);");
+		
+		//a repeat has a string of length 7, such as 1100000, 0101010.......
+		db.execSQL("CREATE TABLE repeats (id INTEGER PRIMARY KEY AUTOINCREMENT,  repeat_days TEXT);");
+		//a reminder has numbers of days, hours, and minutes
+		db.execSQL("CREATE TABLE reminders (id INTEGER PRIMARY KEY AUTOINCREMENT, days INTEGER, hours INTEGER, minutes INTEGER);");
+		//a resource has the path
+		db.execSQL("CREATE TABLE resources (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT);");
+		//a tag has a name
 		db.execSQL("CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT, name Text );");
+		//this saves mappings of tasks and tags
 		db.execSQL("CREATE TABLE tag_task (id INTEGER PRIMARY KEY AUTOINCREMENT, tag_id INTEGER, task_id INTEGER);");
-		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_created REAL, date_started REAL, date_due REAL);");
-		db.execSQL("CREATE TABLE plants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);");
-		
-		ContentValues cv = new ContentValues();
-		
-		cv.put("name", "tag1");
-		db.insert("tags", null, cv);
-		cv.clear();
-		
-		cv.put("name", "tag2");
-		db.insert("tags", null, cv);
-		cv.clear();
-		
-		cv.put("name", "tag3");
-		db.insert("tags", null, cv);
-		cv.clear();
-		
-		cv.put("name", "tag4");
-		db.insert("tags", null, cv);
-		cv.clear();
-		
-		cv.put("title", "task1");
-		cv.put("description", "This is task 1");
-		cv.put("date_created", "09012011");
-		cv.put("date_started", "09022011");
-		cv.put("date_due", "09072011");
-		db.insert("tasks", null, cv);
-		cv.clear();
-		
-		cv.put("tag_id", 2);
-		cv.put("task_id", 1);
-		db.insert("tag_task", null, cv);
-		cv.clear();
-		
-		cv.put("tag_id", 3);
-		cv.put("task_id", 1);
-		db.insert("tag_task", null, cv);
-		cv.clear();
-		
-		cv.put("name", "Mary");
-		db.insert("plants", null, cv);
-		cv.clear();
-		
-		cv.put("name", "Rose");
-		db.insert("plants", null, cv);
-		cv.clear();
+		//a plan type has type_name
+		db.execSQL("CREATE TABLE plant_types (id INTEGER PRIMARY KEY AUTOINCREMENT, type_name TEXT);");
+		//a location has x,y
+		db.execSQL("CREATE TABLE locaions (id INTEGER PRIMARY KEY AUTOINCREMENT, x INTEGER, y INTEGER);");
+		//a stage has current, max
+		db.execSQL("CREATE TABLE stages (id INTEGER PRIMARY KEY AUTOINCREMENT, current INTEGER, max INTEGER);");	
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		android.util.Log.w(TAGS, "Upgrading databse, which will destroy all old data");
-		db.execSQL("DROP TABLE IF EXISTS constants");
-		onCreate(db);
+		android.util.Log.w(TAGS, "Upgrading databse, dont do anything now");
+//		onCreate(db);
 	}
 	
 	

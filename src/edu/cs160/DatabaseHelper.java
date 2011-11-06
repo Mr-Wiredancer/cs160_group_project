@@ -8,7 +8,7 @@ import android.database.*;
 import android.hardware.*;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-	private static final String DATABASE_NAME="db";
+	private static final String DATABASE_NAME="db4";
 //	static final String TITLE="title";
 //	static final String VALUE="value";
 	static final String NAME="name";
@@ -25,8 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		 * Main table: tasks and plants
 		 * Helper table: reminders, repeats, resources, tags, tag_tasks, stages, locations 
 		 */
-		//task has title, description, date_time_created, date_time_finished, repeat_id, reminder_id, tag_task_id, resource_id
-		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_time_created TEXT, date_time_finished TEXT, repeat_id INTEGER, reminder_id INTEGER, tag_task_id INTEGER, resouce_id INTEGER);");
+		//task has title, description, date_time_created, date_time_finished, repeat_id, reminder_id, resource_id
+		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_time_created TEXT, date_time_finished TEXT, repeat_id INTEGER, reminder_id INTEGER, resource_id INTEGER);");
 		//a plant has name, plant_type_id, location_id, stage_id, resource_id
 		db.execSQL("CREATE TABLE plants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, plant_type_id INTEGER, location_id INTEGER, stage_id INTEGER, resource_id INTEGER);");
 		

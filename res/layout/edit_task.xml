@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<ScrollView android:id="@+id/ScrollView01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:baselineAligned="true" android:orientation="vertical" android:weightSum="1">
+	        <TextView android:id="@+id/TextView01" android:text="Name of Event" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+	        <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/InputText">
+	            <requestFocus></requestFocus>
+	        </EditText>
+	        <TextView android:text="Start Date" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Date_Start"></TextView>
+
+	        <DatePicker
+	            android:id="@+id/datePicker"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+</DatePicker>
+	        <TextView android:text="Start Time" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Time_Start"></TextView>
+	        <TimePicker android:layout_width="wrap_content" android:id="@+id/timePicker_Start" android:layout_height="150dp"></TimePicker>
+	        <TextView android:text="End Time" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Time_End"></TextView>
+	        <TimePicker android:layout_width="wrap_content" android:id="@+id/timePIcker_End" android:layout_height="150dp"></TimePicker>	        
+	        <TextView android:text="Description" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Description"></TextView>
+	        <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="textMultiLine" android:id="@+id/Description" android:ellipsize="end"></EditText>
+	        <TextView android:text="Repeat" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Repeat"></TextView>
+	        <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Spinner_Repeat"></Spinner>
+	        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:layout_height="wrap_content">
+	            <CheckBox android:layout_width="wrap_content" android:text="M" android:layout_height="wrap_content" android:id="@+id/Repeat_M" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_Tu" android:text="Tu" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_W" android:text="W" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_Th" android:text="Th" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_F" android:text="F" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_Sa" android:text="Sa" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	            <CheckBox android:layout_width="wrap_content" android:id="@+id/Repeat_Su" android:text="Su" android:layout_height="wrap_content" android:visibility="gone"></CheckBox>
+	        </LinearLayout>
+	        <TextView android:text="Reminder(In time before to remind)" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Reminder"></TextView>
+	        <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Spinner_Reminder"></Spinner>
+	        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content">
+	            <EditText android:layout_height="wrap_content" android:inputType="number" android:id="@+id/Reminder_Days" android:text="0" android:layout_width="127dp" android:visibility="gone"></EditText>
+	            <TextView android:text="Days" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/Description_Reminder_Days" android:visibility="gone"></TextView>
+	            <EditText android:inputType="number" android:layout_height="wrap_content" android:id="@+id/Reminder_Hours" android:text="0" android:layout_width="110dp" android:visibility="gone"></EditText>
+	            <TextView android:text="Hours" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/Description_Reminder_Hours" android:visibility="gone"></TextView>
+	            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="number" android:layout_weight="0.02" android:id="@+id/Reminder_Minutes" android:text="0" android:visibility="gone"></EditText>
+	            <TextView android:text="Minutes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_weight="0.08" android:id="@+id/Description_Reminder_Minutes" android:visibility="gone"></TextView>
+	        </LinearLayout>
+	        <TextView android:text="Tags" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Tag"></TextView>
+	        
+	        <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="textPostalAddress" android:id="@+id/Tags"></EditText>
+	        <TextView android:id="@+id/OutputText" android:text="$0.00" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content"></TextView>
+	        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout5" android:layout_width="fill_parent" android:weightSum="1">
+	            <Button android:id="@+id/Okay" android:text="Okay" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="0.24"></Button>
+	            <Button android:text="Cancel" android:layout_weight="0.24" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Cancel"></Button>
+	        </LinearLayout>        
+	    </LinearLayout>
+    </ScrollView>

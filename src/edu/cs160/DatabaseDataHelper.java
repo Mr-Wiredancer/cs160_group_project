@@ -1,5 +1,6 @@
 package edu.cs160;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -75,6 +76,18 @@ public class DatabaseDataHelper {
 	}
 	
 	/**
+	 * Add a new entry to tag_task table 
+	 * @param tag_id
+	 * @param task_id
+	 */
+	public void addNewTagTask(int tag_id, int task_id){
+		ContentValues cv = new ContentValues();
+		cv.put("tag_id", tag_id);
+		cv.put("task_id", task_id);
+		dbw.insert("tag_task", null,cv);
+	}
+	
+	/**
 	 * Add a new entry to stages table
 	 * @param current
 	 * @param max
@@ -95,17 +108,16 @@ public class DatabaseDataHelper {
 	 * @param tag_task_id
 	 * @param resource_id
 	 */
-	public void addNewTask(String title, String description, int repeat_id, int reminder_id, int tag_task_id, int resource_id){
+	public void addNewTask(String title, String description, int repeat_id, int reminder_id, int resource_id){
 		ContentValues cv=new ContentValues();
 		cv.put("title", title);
 		cv.put("description", description);
 		cv.put("repeat_id", repeat_id);
 		cv.put("reminder_id" , reminder_id);
-		cv.put("tag_task_id", tag_task_id);
 		cv.put("resource_id", resource_id);
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
-		cv.put("date_created", formatter.format(new Date()));
-		cv.putNull("date_finished");
+		cv.put("date_time_created", formatter.format(new Date()));
+		cv.putNull("date_time_finished");
 		dbw.insert("tasks", null, cv);
 	}
 	
@@ -182,11 +194,25 @@ public class DatabaseDataHelper {
 		Cursor c=dbr.rawQuery("SELECT * FROM tasks;", null);
 		LinkedList<Task> tasks = new LinkedList<Task>();
 		while(c.moveToNext()){
-			tasks.add(new Task(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getInt(6),c.getInt(7), c.getInt(8)));
+			int task_id = c.getInt(0);	
+			tasks.add(getTask(task_id));
 		}
 		c.close();
 		return tasks;
 	}
+	
+	/**
+	 * get Tag object from tag_id
+	 * @param tag_id
+	 * @return a Tag object
+	 */
+	public Tag getTag(int tag_id){
+		Cursor tagcursor = dbr.rawQuery("SELECT * FROM tags where id="+tag_id+";", null);
+		tagcursor.moveToNext();
+		String tag_name = tagcursor.getString(1);
+		return new Tag(tag_id,tag_name);
+	}
+	
 	/**
 	 * get all the tags for a certain task
 	 * @param task_id
@@ -197,14 +223,69 @@ public class DatabaseDataHelper {
 		Cursor c=dbr.rawQuery("SELECT * FROM tag_task WHERE task_id="+task_id+";", null);
 		while (c.moveToNext()){
 			int tag_id=c.getInt(1);
-			Cursor tagcursor = dbr.rawQuery("SELECT * FROM tags where id="+tag_id+";", null);
-			String tag_name = tagcursor.getString(1);
-			tags.add(new Tag(tag_id,tag_name));
-			tagcursor.close();
+			tags.add(getTag(tag_id));
 		}
 		c.close();
 		return tags;
 	}
+	
+	/**
+	 * get Task object from a task_id
+	 * @param task_id
+	 * @return a Task object
+	 */
+	public Task getTask(int task_id){
+		Cursor c = dbr.rawQuery("SELECT * FROM tasks WHERE id="+task_id+";", null);
+		c.moveToNext();
+		String title = c.getString(1);
+		String description = c.getString(2);
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		
+		Date date_time_created = null;
+		Date date_time_finished = null;
+		try{
+			date_time_created = formatter.parse(c.getString(3));
+		}catch(ParseException e){
+			System.out.println("date_created parse error");
+			date_time_created = null;
+		}
+		try{
+			if (c.getString(4)!=null){
+				date_time_finished = formatter.parse(c.getString(4));
+			}
+		}catch(ParseException e){
+			System.out.println("date_finished parse error");
+			date_time_finished = null;
+		}
+			
+		int repeat_id = c.getInt(5);
+		int reminder_id = c.getInt(6);
+		int resource_id = c.getInt(7);		
+		return new Task(task_id, title, description, date_time_created, date_time_finished, getRepeat(repeat_id), getReminder(reminder_id), getTagsForTask(task_id), resource_id);
+	}
+	
+	/**
+	 * get Repeat object from a Repeat id
+	 * @param repeat_id
+	 * @return
+	 */
+	public Repeat getRepeat(int repeat_id){
+		Cursor c = dbr.rawQuery("SELECT * FROM repeats WHERE id="+repeat_id+";", null);
+		c.moveToNext();
+		return new Repeat(repeat_id, c.getString(1));
+	}
+	
+	/**
+	 * get Reminder object from a reminder_id
+	 * @param reminder_id
+	 * @return a reminder object
+	 */
+	public Reminder getReminder(int reminder_id){
+		Cursor c = dbr.rawQuery("SELECT * FROM reminders WHERE id="+reminder_id+";", null);
+		c.moveToNext();
+		return new Reminder(reminder_id, c.getInt(1), c.getInt(2), c.getInt(3));
+	}
+	
 	
 	/**
 	 * Get all the plants

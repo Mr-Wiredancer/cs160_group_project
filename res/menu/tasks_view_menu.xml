@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/add_new_task" android:title="@string/add_new_task_label" android:alphabeticShortcut="@string/add_new_task_shortcut" />
+<item android:id="@+id/go_garden_view" android:title="@string/go_garden_view_label" android:alphabeticShortcut="@string/go_garden_view_shortcut" />
+<item android:id="@+id/quit" android:title="@string/quit_label" android:alphabeticShortcut="@string/quit_shortcut" />
+</menu>

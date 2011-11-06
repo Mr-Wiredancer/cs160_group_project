@@ -1,0 +1,40 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+            <teamYttrium.Project.Game.Screens.Game_Grower_Screen
+                android:id="@+id/gameGrowerScreen1"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"/>
+                
+            <TextView
+                android:id="@+id/Description_Garden_GrowerPlant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select a plant"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/Description_Garden_Grower_Progress_Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ProgressBar
+                android:id="@+id/Description_Garden_Grower_Progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100000" />
+           <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/plant_sapling1" />           
+
+    </LinearLayout>

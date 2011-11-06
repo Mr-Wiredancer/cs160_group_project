@@ -1,25 +1,28 @@
 package edu.cs160;
 
+import java.util.Date;
+import java.util.LinkedList;
+
 public class Task{
 	int id;
 	String title;
 	String description;
-	String date_created;
-	String date_finished;
-	int repeat_id;
-	int reminder_id;
-	int tag_task_id;
+	Date date_created;
+	Date date_finished;
+	Repeat repeat;
+	Reminder reminder;
+	LinkedList<Tag> tags;
 	int resource_id;
 	
-	public Task(int id, String title, String description, String date_started, String date_finished, int repeat_id, int reminder_id, int tag_task_id, int resource_id){
+	public Task(int id, String title, String description, Date date_started, Date date_finished, Repeat repeat, Reminder reminder, LinkedList<Tag> tags, int resource_id){
 		this.id=id;
 		this.title=title;
 		this.description=description;
 		this.date_created=date_started;
 		this.date_finished=date_finished;
-		this.repeat_id=repeat_id;
-		this.reminder_id=reminder_id;
-		this.tag_task_id=tag_task_id;
+		this.repeat = repeat;
+		this.reminder = reminder;
+		this.tags = tags;
 		this.resource_id=resource_id;
 	}
 	

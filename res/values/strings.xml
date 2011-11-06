@@ -8,4 +8,30 @@
     <string name="go_task_view_label">View my tasks</string> 
     <string name="go_task_view_title">view task</string> 
     <string name="go_task_view_shortcut">t</string>
+    <string name="go_garden_view_label">View my garden</string> 
+    <string name="go_garden_view_title">view garden</string> 
+    <string name="go_garden_view_shortcut">g</string>
+    <string name="add_new_task_label">Add new task</string>
+    <string name="add_new_task_title">add new task</string>
+    <string name="add_new_task_shortcut">n</string>
+    <string-array name="Repeat_Values">
+    	<item>Don\'t Repeat</item>    	
+        <item>Everyday</item>
+        <item>Every Week</item>
+        <item>Every Month</item>
+        <item>Weekdays</item>
+        <item>Weekends</item>
+        <item>Custom...</item>        
+    </string-array>
+    <string-array name="Remind_Values">
+    	<item>Don\'t Remind</item>
+        <item>On Time</item>
+        <item>5 Minutes Before</item>
+        <item>15 Minutes Before</item>
+        <item>30 Minutes Before</item>
+        <item>1 Hour Before</item><item>1 Day Before</item>
+        <item>3 Days Before</item>
+        <item>1 Week Before</item>               
+        <item>Custom...</item>
+    </string-array>  
 </resources>

@@ -5,7 +5,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-            <teamYttrium.Project.Game.Screens.Game_Grower_Screen
+            <edu.cs160.Game.Screens.Game_Grower_Screen
                 android:id="@+id/gameGrowerScreen1"
                 android:layout_width="wrap_content"
                 android:layout_height="400dp"/>

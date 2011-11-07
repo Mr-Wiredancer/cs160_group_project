@@ -21,3 +21,4 @@ Features needed:
 	Task Management:
 		1. Check off a task;
 		2. Delete a task;
+		3. Sync with google calender

@@ -8,6 +8,7 @@ public class DrawThread extends Thread{
 private SurfaceHolder sh;
 private Screen screen;
 private boolean running= false;
+public int typeID = 0;
 
 	public DrawThread(SurfaceHolder sh,Screen sc){
 		this.sh = sh;

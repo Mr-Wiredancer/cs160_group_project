@@ -45,6 +45,9 @@ private boolean reversable, reverse = false;
 	}
 	
 	public void Update(long gameTime){
+		if(frameMax <=1){
+			return;
+		}
 		if(gameTime>timeStamp+fps){
 			timeStamp = gameTime;
 			if(reverse){

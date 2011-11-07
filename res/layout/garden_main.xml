@@ -3,26 +3,11 @@
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
-
-            <edu.cs160.Game.Screens.Game_Grower_Screen
-                android:id="@+id/gameGrowerScreen2"
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"/>
-
-            <ToggleButton
-                android:id="@+id/Garden_Inventory_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="Open Inventory"
-                android:textOn="Close Inventory" />
-            
-            <edu.cs160.Game.Screens.Game_Inventory_Screen
-                android:id="@+id/gameInventory"
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"/>
-                
-                     
+        android:orientation="vertical">
+
+        <edu.cs160.Game.Screens.Game_Garden_Screen
+            android:id="@+id/gameMainScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>

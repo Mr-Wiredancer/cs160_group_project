@@ -117,6 +117,7 @@ public class DatabaseDataHelper {
 		cv.put("resource_id", resource_id);
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
 		cv.put("date_time_created", formatter.format(new Date()));
+		System.out.println(formatter.format(new Date()));
 		cv.putNull("date_time_finished");
 		dbw.insert("tasks", null, cv);
 	}

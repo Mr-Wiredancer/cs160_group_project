@@ -23,6 +23,10 @@ public class Repeat {
 		return sat && sun;
 	}
 	
+	public boolean dontRepeat(){
+		return !(sun || mon || tue || wed || thr || fri || sat);
+	}
+	
 	public boolean isWeekday(){
 		return mon && tue && wed && thr && fri;
 	}

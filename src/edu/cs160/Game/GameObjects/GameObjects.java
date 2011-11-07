@@ -2,9 +2,8 @@ package edu.cs160.Game.GameObjects;
 
 import java.util.HashMap;
 
+import edu.cs160.R;
 import edu.cs160.Game.GameObjects.Sprites.Sprite;
-
-import edu.cs160.*;
 import android.content.res.Resources;
 import android.graphics.*;
 /************************************************
@@ -21,11 +20,11 @@ public class GameObjects {
 	/*
 	 * Add Data - Adds a new game "Object" and stores its image and the corresponding mask
 	 */
-	public static void addData(String name, Bitmap image, Bitmap imageMask){
-		Data.put(name, new ObjectData(name,image,imageMask));
+	public static void addData(String name, Bitmap image, Bitmap imageMask, int imageId,int imageMaskId){
+		Data.put(name, new ObjectData(name,image,imageId,imageMask,imageMaskId));
 	}
-	public static void addData(String name, Bitmap image){
-		Data.put(name, new ObjectData(name,image));
+	public static void addData(String name, Bitmap image,int imageId){
+		Data.put(name, new ObjectData(name,image,imageId));
 	}
 	
 	public static void draw(Resources res,Canvas c, String name, int x, int y, float scaleX, float scaleY){

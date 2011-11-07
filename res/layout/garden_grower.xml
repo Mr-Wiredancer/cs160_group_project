@@ -8,7 +8,7 @@
             <edu.cs160.Game.Screens.Game_Grower_Screen
                 android:id="@+id/gameGrowerScreen1"
                 android:layout_width="wrap_content"
-                android:layout_height="400dp"/>
+                android:layout_height="500dp"/>
                 
             <TextView
                 android:id="@+id/Description_Garden_GrowerPlant"

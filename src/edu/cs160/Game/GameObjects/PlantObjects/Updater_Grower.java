@@ -1,7 +1,7 @@
 package edu.cs160.Game.GameObjects.PlantObjects;
 
+import edu.cs160.R;
 import edu.cs160.Game.GameObjects.DataInitializer;
-import edu.cs160.*;
 import android.app.Activity;
 import android.widget.*;
 

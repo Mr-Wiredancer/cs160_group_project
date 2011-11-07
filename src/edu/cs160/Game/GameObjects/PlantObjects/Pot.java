@@ -4,7 +4,8 @@ import edu.cs160.Game.GameObjects.GameObjects;
 
 public class Pot {
 Plant p;
-int x, y;
+public int x, y;
+public int imgWidth,imgHeight;
 	public Pot(Plant p,int x, int y){
 		this.p = p;
 		p.p=this;
@@ -12,7 +13,8 @@ int x, y;
 		this.x=x;
 		this.y=y;
 		
-		int imgHeight= GameObjects.Data.get("Pot_Small").image.getHeight(), imgWidth=GameObjects.Data.get("Pot_Small").image.getWidth();
+		imgHeight= GameObjects.Data.get("Pot_Small").image.getHeight();
+		imgWidth=GameObjects.Data.get("Pot_Small").image.getWidth();
 		
 		int acceptableY = y+imgHeight/4;
 		int acceptableX = x+imgWidth/2;
@@ -31,6 +33,15 @@ int x, y;
 		
 		p.sprite.x = acceptableX-p.sprite.imgWidth/2;
 		p.sprite.y = acceptableY-p.sprite.imgHeight;
+	}
+	
+	public void update(){
+		int plantCenter =p.sprite.x+p.sprite.imgWidth/2;
+		int plantBot = p.sprite.y+p.sprite.imgHeight;
+		
+		this.x = plantCenter-imgWidth/2;
+		this.y = plantBot-imgHeight/4;
+		
 	}
 	
 	public void free(){

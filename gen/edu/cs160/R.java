@@ -15,15 +15,19 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int dirt=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int icon=0x7f020002;
-        public static final int misc_pot=0x7f020003;
-        public static final int misc_pot_small=0x7f020004;
-        public static final int plant_sapling1=0x7f020005;
-        public static final int plant_sapling1_anim=0x7f020006;
-        public static final int plant_sapling2=0x7f020007;
-        public static final int plant_sapling2_anim=0x7f020008;
+        public static final int blue_rose=0x7f020000;
+        public static final int camellia=0x7f020001;
+        public static final int dirt=0x7f020002;
+        public static final int forgetmenot=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int misc_pot=0x7f020006;
+        public static final int misc_pot_small=0x7f020007;
+        public static final int plant_sapling1=0x7f020008;
+        public static final int plant_sapling1_anim=0x7f020009;
+        public static final int plant_sapling2=0x7f02000a;
+        public static final int plant_sapling2_anim=0x7f02000b;
+        public static final int rose=0x7f02000c;
     }
     public static final class id {
         public static final int Cancel=0x7f070024;
@@ -39,7 +43,6 @@ public final class R {
         public static final int Description_Tag=0x7f07001f;
         public static final int Description_Time_End=0x7f070008;
         public static final int Description_Time_Start=0x7f070006;
-        public static final int Garden_Inventory_Button=0x7f07002b;
         public static final int InputText=0x7f070003;
         public static final int Okay=0x7f070023;
         public static final int OutputText=0x7f070021;
@@ -60,20 +63,19 @@ public final class R {
         public static final int Spinner_Repeat=0x7f07000d;
         public static final int Tags=0x7f070020;
         public static final int TextView01=0x7f070002;
-        public static final int add_new_task=0x7f070030;
+        public static final int add_new_task=0x7f07002e;
         public static final int datePicker=0x7f070005;
         public static final int gameGrowerScreen1=0x7f070025;
-        public static final int gameGrowerScreen2=0x7f07002a;
-        public static final int gameInventory=0x7f07002c;
-        public static final int go_garden_view=0x7f070031;
-        public static final int go_task_view=0x7f07002e;
+        public static final int gameMainScreen=0x7f07002a;
+        public static final int go_garden_view=0x7f07002f;
+        public static final int go_task_view=0x7f07002c;
         public static final int imageButton1=0x7f070029;
         public static final int linearLayout1=0x7f070001;
         public static final int linearLayout2=0x7f07000e;
         public static final int linearLayout3=0x7f070018;
         public static final int linearLayout5=0x7f070022;
-        public static final int quit=0x7f07002f;
-        public static final int task_view_root=0x7f07002d;
+        public static final int quit=0x7f07002d;
+        public static final int task_view_root=0x7f07002b;
         public static final int timePIcker_End=0x7f070009;
         public static final int timePicker_Start=0x7f070007;
     }

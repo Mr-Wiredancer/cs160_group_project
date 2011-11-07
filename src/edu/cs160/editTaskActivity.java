@@ -1,5 +1,7 @@
 package edu.cs160;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -56,7 +58,74 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     
     public void fillFields(int task_id){
     	Task task = dbh.getTask(task_id);
+    	Date dateCreated = task.date_created;
+    	System.out.println(dateCreated);
+    	Date dateFinished = task.date_finished;
+    	
+    	((EditText)findViewById(R.id.InputText)).setText(task.title);
+//    	((DatePicker)findViewById(R.id.datePicker)).updateDate(dateCreated.getYear(), dateCreated.getMonth(), dateCreated.getDay());
+      new AlertDialog.Builder(this).setMessage((dateCreated.getYear()+1900)+" "+dateCreated.getMonth()+" "+dateCreated.getDay()).show();
 
+    	System.out.println("The year is "+dateCreated.getYear());
+    	System.out.println("The month is "+dateCreated.getMonth());
+    	System.out.println("The day is "+dateCreated.getDay());
+
+//    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentHour(dateCreated.getHours());
+//    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentMinute(dateCreated.getMinutes());
+//    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentHour(dateFinished.getHours());
+//    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentMinute(dateFinished.getMinutes());
+//    	((EditText)findViewById(R.id.Description)).setText(task.description);
+//    	
+//    	Repeat repeatData = task.repeat;
+//    	Reminder reminderData = task.reminder;
+//    	if(repeatData.dontRepeat())
+//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(0);
+//    	else if(repeatData.isEveryday())
+//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(1);
+//    	else if(repeatData.isWeekday())
+//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(2);
+//    	else if(repeatData.isWeekend())
+//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(3);
+//    	else{
+//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(4);
+//    		((CheckBox)findViewById(R.id.Repeat_M)).setChecked(repeatData.mon);
+//    		((CheckBox)findViewById(R.id.Repeat_Tu)).setChecked(repeatData.tue);
+//    		((CheckBox)findViewById(R.id.Repeat_W)).setChecked(repeatData.wed);
+//    		((CheckBox)findViewById(R.id.Repeat_Th)).setChecked(repeatData.thr);
+//    		((CheckBox)findViewById(R.id.Repeat_F)).setChecked(repeatData.fri);
+//    		((CheckBox)findViewById(R.id.Repeat_Sa)).setChecked(repeatData.sat);
+//    		((CheckBox)findViewById(R.id.Repeat_Su)).setChecked(repeatData.sun);
+//    	}
+//    	
+//    	if(reminderData.minutes ==-1 && reminderData.hours==-1 && reminderData.days == -1)
+//    		reminder.setSelection(0);    	
+//    	else if(reminderData.minutes==5 && reminderData.hours==0 && reminderData.days==0)
+//    		reminder.setSelection(1);
+//    	else if(reminderData.minutes==15 && reminderData.hours==0 && reminderData.days==0)
+//    		reminder.setSelection(2);
+//    	else if(reminderData.minutes==30 && reminderData.hours==0 && reminderData.days==0)
+//    		reminder.setSelection(3);
+//    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==0)
+//    		reminder.setSelection(4);
+//    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==1)
+//    		reminder.setSelection(5);
+//    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==3)
+//    		reminder.setSelection(6);
+//    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==7)
+//    		reminder.setSelection(7);
+//    	else{
+//    		reminder.setSelection(8);
+//    		((EditText)findViewById(R.id.Reminder_Days)).setText(reminderData.days);
+//    		((EditText)findViewById(R.id.Reminder_Hours)).setText(reminderData.hours);
+//    		((EditText)findViewById(R.id.Reminder_Minutes)).setText(reminderData.minutes);
+//    	}
+//    	
+//    	String tagField="";
+//    	for(Object s: task.tags.toArray()){
+//    		tagField+=(String)s+",";
+//    		
+//    	}
+//    	((EditText)findViewById(R.id.Tags)).setText(tagField);
     }
 
 	@Override
@@ -70,9 +139,7 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
 			String eventName = ((EditText)findViewById(R.id.InputText)).getText().toString(), eventDesc = ((EditText)findViewById(R.id.Description)).toString();
 			DatePicker startDate = (DatePicker)findViewById(R.id.datePicker);		
 			TimePicker startTime = (TimePicker)findViewById(R.id.timePicker_Start), endTime = (TimePicker)findViewById(R.id.timePIcker_End);
-			
-			
-			
+
 		}
 		
 	}

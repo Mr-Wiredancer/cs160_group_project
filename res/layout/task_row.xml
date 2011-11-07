@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="wrap_content" android:layout_width="fill_parent">
+	<ImageView android:id="@+id/icon" android:src="@drawable/icon"
+		android:layout_marginLeft="4px" android:layout_marginRight="8px"
+		android:layout_height="40px" android:layout_marginTop="8px"
+		android:layout_width="30px">
+	</ImageView>
+
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+		<LinearLayout
+		    android:id="@+id/linearLayout2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+
+			<TextView
+			    android:id="@+id/title"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="6px"
+			    android:text="@+id/title"
+			    android:textSize="25px" />
+
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/linearLayout3"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+
+			<TextView
+			    android:id="@+id/description"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="6px"
+			    android:text="@+id/description"
+			    android:textSize="20px" />
+
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/linearLayout4"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+
+			<LinearLayout
+			    android:id="@+id/linearLayout5"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" >
+
+				<TextView
+				    android:id="@+id/textView1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Status: Not Complete" />
+
+				<TextView
+				    android:id="@+id/date_finished"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginTop="6px"
+				    android:text="@+id/date_finished"
+				    android:textSize="20px" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+</LinearLayout>

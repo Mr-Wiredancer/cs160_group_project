@@ -15,6 +15,15 @@ public class DatabaseDataHelper {
 	SQLiteDatabase dbr;
 	SQLiteDatabase dbw;
 
+	/**
+	 * Get a cursor of tasks for list adapter
+	 * @return
+	 */
+	public Cursor getTasksCursor(){
+		return dbr.query("tasks", new String[] {"title", "description", "date_time_finished", "id as _id"}, null, null, null, null, null);
+	}
+	
+	
 	public DatabaseDataHelper(DatabaseHelper database){
 		db=database;
 		dbr=db.getReadableDatabase();

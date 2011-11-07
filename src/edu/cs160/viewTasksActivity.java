@@ -1,12 +1,17 @@
 package edu.cs160;
 
-import java.util.LinkedList;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.view.Menu; import android.view.MenuInflater; import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,44 +20,70 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-public class viewTasksActivity extends Activity {
+
+public class viewTasksActivity extends ListActivity {
     /** Called when the activity is first created. */
-	DatabaseHelper db;
-	DatabaseDataHelper dbh;
-    @Override
+
+	private DatabaseHelper db;
+	private DatabaseDataHelper dbh;
+	private Cursor data;
+	private SimpleCursorAdapter dataSource;
+    
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_view);
         db = new DatabaseHelper(this);
-//        new AlertDialog.Builder(this).setMessage("test dialog").show();
         dbh = new DatabaseDataHelper(db);
-        updateView();
-    }
+        data = dbh.getTasksCursor();
+        startManagingCursor(data);
+    	String fields[] = {"title", "description", "date_time_finished", BaseColumns._ID};
+        int[] to = new int[] { R.id.title, R.id.description, R.id.date_finished };
+        dataSource = new SimpleCursorAdapter(this, R.layout.task_row, data, fields, to);
+        ListView view = getListView();
+        view.setHeaderDividersEnabled(true);
+        setListAdapter(dataSource);
+      //updateView();
+	}
     
-    public void updateView(){
-    	LinearLayout v = (LinearLayout)findViewById(R.id.task_view_root);
-    	for(Task task:dbh.getTasks()){
-//    		TextView child = new TextView(this);
-    		TextView child = (TextView)getLayoutInflater().inflate(R.layout.task_frame, null);
-    		child.setText(task.title);
-    		child.setId(task.id);
-    		child.setTextSize(20);
-    		
-    		child.setOnClickListener(new OnClickListener(){
-    			
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					int task_id = v.getId();
-					Intent i= new Intent(viewTasksActivity.this, editTaskActivity.class);
-					i.putExtra("task_id", task_id);
-					startActivity(i);
-				}
-    			
-    		});
-        	v.addView(child);
-    	}
-    }
+//    public void updateView(){
+//    	LinearLayout v = (LinearLayout)findViewById(R.id.task_view_root);
+//    	for(Task task:database.getTasks()){
+////    		TextView child = new TextView(this);
+//    		TextView child = (TextView)getLayoutInflater().inflate(R.layout.task_frame, null);
+//    		child.setText(task.title);
+//    		child.setId(task.id);
+//    		child.setTextSize(20);
+//    		
+//    		child.setOnClickListener(new OnClickListener(){
+//    			
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					int task_id = v.getId();
+//					Intent i= new Intent(viewTasksActivity.this, editTaskActivity.class);
+//					i.putExtra("task_id", task_id);
+//					startActivity(i);
+//				}
+//    			
+//    		});
+//        	v.addView(child);
+//    	}
+//    }
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		// Get the item that was clicked
+//		Object o = this.getListAdapter().getItem(position);
+//		String keyword = o.toString();
+//		Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG)
+//				.show();
+		//int task_id = v.getId();
+//		Toast.makeText(this, "You selected: " + id, Toast.LENGTH_LONG).show();
+		Intent i= new Intent(this, editTaskActivity.class);
+		i.putExtra("task_id", (int)id);
+		startActivity(i);
+	}
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,14 +95,14 @@ public class viewTasksActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-    	switch(item.getItemId()){
-    	case R.id.add_new_task:
+    	int id = item.getItemId();
+    	if(id==R.id.add_new_task) {
     		startActivity(new Intent(viewTasksActivity.this, editTaskActivity.class));
     		return true;
-    	case R.id.go_garden_view:
+    	} else if (id==R.id.go_garden_view) {
             new AlertDialog.Builder(this).setMessage("go garden pressed").show();
     		return true;
-    	case R.id.quit:
+    	} else if (id==R.id.quit) {
             new AlertDialog.Builder(this).setMessage("quit pressed").show();
     		return true;
     	}

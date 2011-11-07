@@ -63,21 +63,27 @@ public final class R {
         public static final int Spinner_Repeat=0x7f07000d;
         public static final int Tags=0x7f070020;
         public static final int TextView01=0x7f070002;
-        public static final int add_new_task=0x7f07002e;
+        public static final int add_new_task=0x7f070034;
         public static final int datePicker=0x7f070005;
+        public static final int date_finished=0x7f070030;
+        public static final int description=0x7f07002d;
         public static final int gameGrowerScreen1=0x7f070025;
         public static final int gameMainScreen=0x7f07002a;
-        public static final int go_garden_view=0x7f07002f;
-        public static final int go_task_view=0x7f07002c;
+        public static final int go_garden_view=0x7f070035;
+        public static final int go_task_view=0x7f070032;
+        public static final int icon=0x7f07002b;
         public static final int imageButton1=0x7f070029;
         public static final int linearLayout1=0x7f070001;
         public static final int linearLayout2=0x7f07000e;
         public static final int linearLayout3=0x7f070018;
+        public static final int linearLayout4=0x7f07002e;
         public static final int linearLayout5=0x7f070022;
-        public static final int quit=0x7f07002d;
-        public static final int task_view_root=0x7f07002b;
+        public static final int quit=0x7f070033;
+        public static final int task_view_root=0x7f070031;
+        public static final int textView1=0x7f07002f;
         public static final int timePIcker_End=0x7f070009;
         public static final int timePicker_Start=0x7f070007;
+        public static final int title=0x7f07002c;
     }
     public static final class layout {
         public static final int edit_task=0x7f030000;
@@ -85,7 +91,8 @@ public final class R {
         public static final int garden_main=0x7f030002;
         public static final int main=0x7f030003;
         public static final int task_frame=0x7f030004;
-        public static final int tasks_view=0x7f030005;
+        public static final int task_row=0x7f030005;
+        public static final int tasks_view=0x7f030006;
     }
     public static final class menu {
         public static final int main_menu=0x7f060000;

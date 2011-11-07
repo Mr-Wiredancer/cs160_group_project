@@ -1,9 +1,12 @@
 package edu.cs160;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +27,6 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
         Bundle bundle = getIntent().getExtras();
 
         db = new DatabaseHelper(this);
-//      new AlertDialog.Builder(this).setMessage("test dialog").show();
         dbh = new DatabaseDataHelper(db);
         
     	//Setting up the spinners
@@ -38,22 +40,14 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     	reminder.setAdapter(adapter);
     	reminder.setOnItemSelectedListener(this);
-    
+    	
     	//if task id exists, fill the fields
     	if (bundle.containsKey("task_id")){
     		fillFields(bundle.getInt("task_id"));
-    	}
-    	
-        try{
-	        if(savedInstanceState.containsKey("task_id")){
-	        	//If it's not new, then fill in values
-	        	
+    	}else{
+    	      new AlertDialog.Builder(this).setMessage("no task id").show();
 
-	       }
-        }catch(Exception e){
-        	
-        }
-                        
+    	}                        
     }
     
     public void fillFields(int task_id){
@@ -63,69 +57,68 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     	Date dateFinished = task.date_finished;
     	
     	((EditText)findViewById(R.id.InputText)).setText(task.title);
-//    	((DatePicker)findViewById(R.id.datePicker)).updateDate(dateCreated.getYear(), dateCreated.getMonth(), dateCreated.getDay());
-      new AlertDialog.Builder(this).setMessage((dateCreated.getYear()+1900)+" "+dateCreated.getMonth()+" "+dateCreated.getDay()).show();
+    	((DatePicker)findViewById(R.id.datePicker)).updateDate(dateCreated.getYear()+1900, dateCreated.getMonth(), dateCreated.getDay()+6);
 
-    	System.out.println("The year is "+dateCreated.getYear());
-    	System.out.println("The month is "+dateCreated.getMonth());
-    	System.out.println("The day is "+dateCreated.getDay());
-
-//    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentHour(dateCreated.getHours());
-//    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentMinute(dateCreated.getMinutes());
-//    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentHour(dateFinished.getHours());
-//    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentMinute(dateFinished.getMinutes());
-//    	((EditText)findViewById(R.id.Description)).setText(task.description);
+    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentHour(dateCreated.getHours());
+    	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentMinute(dateCreated.getMinutes());
+    	if (dateFinished!=null){
+	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentHour(dateFinished.getHours());
+	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentMinute(dateFinished.getMinutes());
+    	}
+    	((EditText)findViewById(R.id.Description)).setText(task.description);
 //    	
-//    	Repeat repeatData = task.repeat;
-//    	Reminder reminderData = task.reminder;
-//    	if(repeatData.dontRepeat())
-//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(0);
-//    	else if(repeatData.isEveryday())
-//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(1);
-//    	else if(repeatData.isWeekday())
-//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(2);
-//    	else if(repeatData.isWeekend())
-//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(3);
-//    	else{
-//    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(4);
-//    		((CheckBox)findViewById(R.id.Repeat_M)).setChecked(repeatData.mon);
-//    		((CheckBox)findViewById(R.id.Repeat_Tu)).setChecked(repeatData.tue);
-//    		((CheckBox)findViewById(R.id.Repeat_W)).setChecked(repeatData.wed);
-//    		((CheckBox)findViewById(R.id.Repeat_Th)).setChecked(repeatData.thr);
-//    		((CheckBox)findViewById(R.id.Repeat_F)).setChecked(repeatData.fri);
-//    		((CheckBox)findViewById(R.id.Repeat_Sa)).setChecked(repeatData.sat);
-//    		((CheckBox)findViewById(R.id.Repeat_Su)).setChecked(repeatData.sun);
-//    	}
-//    	
-//    	if(reminderData.minutes ==-1 && reminderData.hours==-1 && reminderData.days == -1)
-//    		reminder.setSelection(0);    	
-//    	else if(reminderData.minutes==5 && reminderData.hours==0 && reminderData.days==0)
-//    		reminder.setSelection(1);
-//    	else if(reminderData.minutes==15 && reminderData.hours==0 && reminderData.days==0)
-//    		reminder.setSelection(2);
-//    	else if(reminderData.minutes==30 && reminderData.hours==0 && reminderData.days==0)
-//    		reminder.setSelection(3);
-//    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==0)
-//    		reminder.setSelection(4);
-//    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==1)
-//    		reminder.setSelection(5);
-//    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==3)
-//    		reminder.setSelection(6);
-//    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==7)
-//    		reminder.setSelection(7);
-//    	else{
-//    		reminder.setSelection(8);
+    	Repeat repeatData = task.repeat;
+    	Reminder reminderData = task.reminder;
+    	if(repeatData.dontRepeat())
+    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(0);
+    	else if(repeatData.isEveryday())
+    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(1);
+    	else if(repeatData.isWeekday())
+    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(2);
+    	else if(repeatData.isWeekend())
+    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(3);
+    	else{
+    		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(4);
+    		((CheckBox)findViewById(R.id.Repeat_M)).setChecked(repeatData.mon);
+    		((CheckBox)findViewById(R.id.Repeat_Tu)).setChecked(repeatData.tue);
+    		((CheckBox)findViewById(R.id.Repeat_W)).setChecked(repeatData.wed);
+    		((CheckBox)findViewById(R.id.Repeat_Th)).setChecked(repeatData.thr);
+    		((CheckBox)findViewById(R.id.Repeat_F)).setChecked(repeatData.fri);
+    		((CheckBox)findViewById(R.id.Repeat_Sa)).setChecked(repeatData.sat);
+    		((CheckBox)findViewById(R.id.Repeat_Su)).setChecked(repeatData.sun);
+    	}
+    	
+    	if(reminderData.minutes ==-1 && reminderData.hours==-1 && reminderData.days == -1)
+    		reminder.setSelection(0);    	
+    	else if(reminderData.minutes==5 && reminderData.hours==0 && reminderData.days==0)
+    		reminder.setSelection(1);
+    	else if(reminderData.minutes==15 && reminderData.hours==0 && reminderData.days==0)
+    		reminder.setSelection(2);
+    	else if(reminderData.minutes==30 && reminderData.hours==0 && reminderData.days==0)
+    		reminder.setSelection(3);
+    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==0)
+    		reminder.setSelection(4);
+    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==1)
+    		reminder.setSelection(5);
+    	else if(reminderData.minutes==0 && reminderData.hours==0 && reminderData.days==3)
+    		reminder.setSelection(6);
+    	else if(reminderData.minutes==0 && reminderData.hours==1 && reminderData.days==7)
+    		reminder.setSelection(7);
+    	else{
+    		reminder.setSelection(8);
+    		//keep error
 //    		((EditText)findViewById(R.id.Reminder_Days)).setText(reminderData.days);
 //    		((EditText)findViewById(R.id.Reminder_Hours)).setText(reminderData.hours);
 //    		((EditText)findViewById(R.id.Reminder_Minutes)).setText(reminderData.minutes);
-//    	}
+    	}
 //    	
-//    	String tagField="";
-//    	for(Object s: task.tags.toArray()){
-//    		tagField+=(String)s+",";
-//    		
-//    	}
-//    	((EditText)findViewById(R.id.Tags)).setText(tagField);
+    	
+    	String tagField="";
+    	for(Tag t: dbh.getTagsForTask(task_id)){
+    		tagField+=t.name+",";
+    		
+    	}
+    	((EditText)findViewById(R.id.Tags)).setText(tagField);
     }
 
 	@Override

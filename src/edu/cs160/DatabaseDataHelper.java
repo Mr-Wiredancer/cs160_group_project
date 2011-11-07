@@ -170,8 +170,8 @@ public class DatabaseDataHelper {
 	 * @param location_id
 	 * @param stage_id
 	 */
-	public void addNewPlant(String name, int plant_type_id, int location_id, int stage_id){
-		addNewPlant(name, plant_type_id, location_id, stage_id, 0);
+	public void addNewPlant(String name, int plant_type_id, int location_id, int max_xp){
+		addNewPlant(name, plant_type_id, location_id, 0, max_xp, 1 , 0);
 	}
 	
 	/**
@@ -182,12 +182,14 @@ public class DatabaseDataHelper {
 	 * @param stage_id
 	 * @param resource_id
 	 */
-	public void addNewPlant(String name, int plant_type_id, int location_id, int stage_id, int resource_id){
+	public void addNewPlant(String name, int plant_type_id, int location_id, int current_xp, int max_xp, int level, int resource_id){
 		ContentValues cv=new ContentValues();
 		cv.put("name", name);
 		cv.put("plant_type_id", plant_type_id);
 		cv.put("location_id", location_id);
-		cv.put("stage_id", stage_id);
+		cv.put("current_xp", current_xp);
+		cv.put("max_hp", max_xp);
+		cv.put("level", level);
 		if (resource_id==0){
 			cv.putNull("resource_id");
 		}else{
@@ -252,6 +254,7 @@ public class DatabaseDataHelper {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
 		
 		Date date_time_created = null;
+		Date date_time_started = null;
 		Date date_time_finished = null;
 		try{
 			date_time_created = formatter.parse(c.getString(3));
@@ -260,18 +263,25 @@ public class DatabaseDataHelper {
 			date_time_created = null;
 		}
 		try{
+			date_time_started = formatter.parse(c.getString(4));
+		}catch(ParseException e){
+			System.out.println("date_created parse error");
+			date_time_started = null;
+		}
+		try{
 			if (c.getString(4)!=null){
-				date_time_finished = formatter.parse(c.getString(4));
+				date_time_finished = formatter.parse(c.getString(5));
 			}
 		}catch(ParseException e){
 			System.out.println("date_finished parse error");
 			date_time_finished = null;
 		}
 			
-		int repeat_id = c.getInt(5);
-		int reminder_id = c.getInt(6);
-		int resource_id = c.getInt(7);		
-		return new Task(task_id, title, description, date_time_created, date_time_finished, getRepeat(repeat_id), getReminder(reminder_id), getTagsForTask(task_id), resource_id);
+		int repeat_id = c.getInt(6);
+		int reminder_id = c.getInt(7);
+		int resource_id = c.getInt(8);	
+		int completed = c.getInt(9);
+		return new Task(task_id, title, description, date_time_created, date_time_started, date_time_finished, getRepeat(repeat_id), getReminder(reminder_id), getTagsForTask(task_id), resource_id, completed);
 	}
 	
 	/**
@@ -305,7 +315,7 @@ public class DatabaseDataHelper {
 		Cursor c=dbr.rawQuery("SELECT * FROM plants;", null);
 		LinkedList<Plant> plants = new LinkedList<Plant>();
 		while(c.moveToNext()){
-			plants.add(new Plant(c.getInt(0),c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5)));
+			plants.add(new Plant(c.getInt(0),c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5), c.getInt(6), c.getInt(7)));
 		}
 		c.close();
 		return plants;

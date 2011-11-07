@@ -8,7 +8,7 @@ import android.database.*;
 import android.hardware.*;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-	private static final String DATABASE_NAME="db_test";
+	private static final String DATABASE_NAME="db_test_1";
 //	static final String TITLE="title";
 //	static final String VALUE="value";
 	static final String NAME="name";
@@ -26,9 +26,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		 * Helper table: reminders, repeats, resources, tags, tag_tasks, stages, locations 
 		 */
 		//task has title, description, date_time_created, date_time_finished, repeat_id, reminder_id, resource_id
-		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_time_created TEXT, date_time_finished TEXT, repeat_id INTEGER, reminder_id INTEGER, resource_id INTEGER);");
+		db.execSQL("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, date_time_created TEXT, date_time_started TEXT, date_time_finished TEXT, repeat_id INTEGER, reminder_id INTEGER, resource_id INTEGER, completed INTEGER);");
 		//a plant has name, plant_type_id, location_id, stage_id, resource_id
-		db.execSQL("CREATE TABLE plants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, plant_type_id INTEGER, location_id INTEGER, stage_id INTEGER, resource_id INTEGER);");
+		db.execSQL("CREATE TABLE plants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, plant_type_id INTEGER, location_id INTEGER, current_xp INTEGER, max_xp INTEGER, level INTEGER, resource_id INTEGER);");
 		
 		//a repeat has a string of length 7, such as 1100000, 0101010.......
 		db.execSQL("CREATE TABLE repeats (id INTEGER PRIMARY KEY AUTOINCREMENT,  repeat_days TEXT);");

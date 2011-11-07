@@ -14,6 +14,9 @@
     <string name="add_new_task_label">Add new task</string>
     <string name="add_new_task_title">add new task</string>
     <string name="add_new_task_shortcut">n</string>
+    <string name="seed_market_label">Seed market</string>
+    <string name="seed_market_title">seed market</string>
+    <string name="seed_market_shortcut">s</string>
     <string-array name="Repeat_Values">
     	<item>Don\'t Repeat</item>    	
         <item>Everyday</item>

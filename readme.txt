@@ -6,19 +6,20 @@
 % updated at Nov 07, 2011
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-Features implemented:
+Features implemented in the prototype:
 	Garden:
 		1. Drag the plants;
 	Task Management:
 		1. Show all tasks;
 		2. Look at a specific task;
-		3. Add/Edit a new task;
-
+		3. Add/Edit/Delete a new task;
+		4. Check off a task
+		5. Sync a task
+		
 Features needed:
 	Garden:
 		1. Track the progress of the plants;
 		2. Connect task management with plants growing;
+		3. Seed market
 	Task Management:
-		1. Check off a task;
-		2. Delete a task;
 		3. Sync with google calender

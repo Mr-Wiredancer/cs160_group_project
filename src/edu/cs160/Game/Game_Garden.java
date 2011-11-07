@@ -1,5 +1,7 @@
 package edu.cs160.Game;
 
+import java.util.Date;
+
 import edu.cs160.DEBUGGER;
 import edu.cs160.DatabaseDataHelper;
 import edu.cs160.DatabaseHelper;
@@ -46,8 +48,8 @@ public class Game_Garden extends Activity{
     	dbh.addNewReminder(1, 1, 1);
     	dbh.addNewResource("test path");
     	dbh.addNewTagTask(1, 1);
-    	dbh.addNewTask("task1", "This is task 1", 1, 1, 1);
-    	dbh.addNewTask("task2", "this is task 2", 1 ,1, 1);
+    	dbh.addNewTask("task1", "This is task 1",new Date(), new Date(), 1, 1, 1);
+    	dbh.addNewTask("task2", "this is task 2", new Date(), new Date(),1,1,1);
     }
 	
 //	@Override

@@ -1,6 +1,9 @@
 package edu.cs160;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,8 +34,8 @@ public class mainActivity extends Activity {
     	dbh.addNewReminder(1, 1, 1);
     	dbh.addNewResource("test path");
     	dbh.addNewTagTask(1, 1);
-    	dbh.addNewTask("task1", "This is task 1", 1, 1, 1);
-    	dbh.addNewTask("task2", "this is task 2", 1,1,1);
+    	dbh.addNewTask("task1", "This is task 1",new Date(), new Date(), 1, 1, 1);
+    	dbh.addNewTask("task2", "this is task 2", new Date(), new Date(),1,1,1);
     }
     
     @Override

@@ -117,7 +117,7 @@ public class DatabaseDataHelper {
 	 * @param tag_task_id
 	 * @param resource_id
 	 */
-	public void addNewTask(String title, String description, int repeat_id, int reminder_id, int resource_id){
+	public void addNewTask(String title, String description, Date date_started, Date date_finished, int repeat_id, int reminder_id, int resource_id){
 		ContentValues cv=new ContentValues();
 		cv.put("title", title);
 		cv.put("description", description);
@@ -127,7 +127,8 @@ public class DatabaseDataHelper {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
 		cv.put("date_time_created", formatter.format(new Date()));
 		System.out.println(formatter.format(new Date()));
-		cv.putNull("date_time_finished");
+		cv.put("date_time_finished", formatter.format(date_finished));
+		cv.put("date_time_started", formatter.format(date_started));
 		dbw.insert("tasks", null, cv);
 	}
 	
@@ -306,6 +307,53 @@ public class DatabaseDataHelper {
 		return new Reminder(reminder_id, c.getInt(1), c.getInt(2), c.getInt(3));
 	}
 	
+	/**
+	 * update reminder
+	 * @param reminder_id
+	 * @param reminder
+	 */
+	public void updateReminder(int reminder_id, Reminder reminder){
+		ContentValues cv = new ContentValues();
+		cv.put("days", reminder.days);
+		cv.put("hours", reminder.hours);
+		cv.put("minutes", reminder.minutes);
+		dbw.update("reminders", cv, "id="+reminder_id, null);
+	}
+	
+	/**
+	 * Update repeat
+	 * @param repeat_id
+	 * @param repeat
+	 */
+	public void updateRepeat(int repeat_id, Repeat repeat){
+		ContentValues cv = new ContentValues();
+		cv.put("repeat_days", (repeat.sun?"1":"0")+(repeat.mon?"1":"0")+(repeat.tue?"1":"0")+(repeat.wed?"1":"0")+(repeat.thr?"1":"0")+(repeat.fri?"1":"0")+(repeat.sat?"1":"0"));
+		dbw.update("repeats", cv, "id="+repeat_id, null);
+	}
+	
+	/**
+	 * Update the task with id=original_task.id
+	 * @param newTitle
+	 * @param newDescription
+	 * @param newReminder
+	 * @param newRepeat
+	 * @param newStartDate
+	 * @param newEndDate
+	 * @param original_task
+	 */
+	public void updateTask(String newTitle, String newDescription, Reminder newReminder, Repeat newRepeat, Date newStartDate, Date newEndDate, Task original_task){
+		ContentValues cv=new ContentValues();
+		cv.put("title",newTitle);
+		cv.put("description", newDescription);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		System.out.println(formatter.format(new Date()));
+		cv.put("date_time_started", formatter.format(newStartDate));
+		cv.put("date_time_finished", formatter.format(newEndDate));
+		updateReminder(original_task.reminder.id, newReminder);
+		updateRepeat(original_task.repeat.id, newRepeat);
+		dbw.update("tasks", cv, "id="+original_task.id, null);
+	}
 	
 	/**
 	 * Get all the plants

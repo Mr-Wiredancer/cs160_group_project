@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="smallFont" >
+        <item name="android:textSize">10dip</item>
+    </style>
+</resources>

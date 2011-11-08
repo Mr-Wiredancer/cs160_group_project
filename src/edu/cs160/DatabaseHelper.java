@@ -52,7 +52,17 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 		android.util.Log.w(TAGS, "Upgrading databse, dont do anything now");
-//		onCreate(db);
+		db.execSQL("DROP TABLE IF EXISTS tasks"); 
+		db.execSQL("DROP TABLE IF EXISTS tags");  
+		db.execSQL("DROP TABLE IF EXISTS locations");  
+		db.execSQL("DROP TABLE IF EXISTS stages");  
+		db.execSQL("DROP TABLE IF EXISTS plant_types");  
+		db.execSQL("DROP TABLE IF EXISTS tag_task");  
+		db.execSQL("DROP TABLE IF EXISTS resources");
+		db.execSQL("DROP TABLE IF EXISTS reminders");  
+		db.execSQL("DROP TABLE IF EXISTS repeats");
+		db.execSQL("DROP TABLE IF EXISTS plants");  
+        onCreate(db);  
 	}
 	
 	

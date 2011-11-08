@@ -19,6 +19,12 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
 	Spinner reminder, repeater;
 	DatabaseHelper db;
 	DatabaseDataHelper dbh;
+	Task currentTask;
+	
+	public void sync(View v){
+        new AlertDialog.Builder(this).setMessage("your task has been synced to Google Calender").show();
+
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,21 +48,18 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     	reminder.setOnItemSelectedListener(this);
     	
     	//if task id exists, fill the fields
-    	if (bundle.containsKey("task_id")){
+    	if (bundle!=null && bundle.containsKey("task_id")){
     		fillFields(bundle.getInt("task_id"));
-    	}else{
-    	      new AlertDialog.Builder(this).setMessage("no task id").show();
-
     	}                        
     }
     
     public void fillFields(int task_id){
-    	Task task = dbh.getTask(task_id);
-    	Date dateCreated = task.date_created;
+    	currentTask = dbh.getTask(task_id);
+    	Date dateCreated = currentTask.date_created;
     	System.out.println(dateCreated);
-    	Date dateFinished = task.date_finished;
+    	Date dateFinished = currentTask.date_finished;
     	
-    	((EditText)findViewById(R.id.InputText)).setText(task.title);
+    	((EditText)findViewById(R.id.InputText)).setText(currentTask.title);
     	((DatePicker)findViewById(R.id.datePicker)).updateDate(dateCreated.getYear()+1900, dateCreated.getMonth(), dateCreated.getDay()+6);
 
     	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentHour(dateCreated.getHours());
@@ -65,10 +68,10 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
 	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentHour(dateFinished.getHours());
 	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentMinute(dateFinished.getMinutes());
     	}
-    	((EditText)findViewById(R.id.Description)).setText(task.description);
+    	((EditText)findViewById(R.id.Description)).setText(currentTask.description);
 //    	
-    	Repeat repeatData = task.repeat;
-    	Reminder reminderData = task.reminder;
+    	Repeat repeatData = currentTask.repeat;
+    	Reminder reminderData = currentTask.reminder;
     	if(repeatData.dontRepeat())
     		((Spinner)findViewById(R.id.Spinner_Repeat)).setSelection(0);
     	else if(repeatData.isEveryday())
@@ -132,7 +135,6 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
 			String eventName = ((EditText)findViewById(R.id.InputText)).getText().toString(), eventDesc = ((EditText)findViewById(R.id.Description)).toString();
 			DatePicker startDate = (DatePicker)findViewById(R.id.datePicker);		
 			TimePicker startTime = (TimePicker)findViewById(R.id.timePicker_Start), endTime = (TimePicker)findViewById(R.id.timePIcker_End);
-
 		}
 		
 	}

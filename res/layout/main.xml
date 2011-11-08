@@ -4,9 +4,37 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="This should be the garden View"
-    />
+<Button
+	android:text="@string/zen_garden_button"
+	android:id = "@+id/zen_garden_button"
+	android:layout_gravity="center"
+	android:layout_width="200dip"
+	android:layout_marginTop="10dip"
+	android:onClick="go"
+	android:layout_marginBottom="10dip" android:layout_height="wrap_content"></Button>
+<Button
+	android:text="@string/genchi_garden_button"
+	android:layout_gravity="center"
+	android:id = "@+id/genchi_garden_button"
+	android:layout_width="200dip"
+	android:layout_marginTop="10dip"
+	android:onClick="go"
+	
+	android:layout_marginBottom="10dip" android:layout_height="wrap_content"></Button>
+<Button
+	android:text="@string/seed_market_button"
+	android:id = "@+id/seed_market_button"
+	android:layout_gravity = "center"
+	android:layout_width = "200dip"
+	android:onClick="go"
+	android:layout_marginTop = "10dip"
+	android:layout_marginBottom = "10dip" android:layout_height="wrap_content"></Button>
+<Button
+	android:text="@string/help_button"
+	android:id = "@+id/help_button"
+	android:layout_gravity="center"
+	android:onClick="go"
+	android:layout_width="200dip"
+	android:layout_marginTop="10dip"
+	android:layout_marginBottom="10dip" android:layout_height="wrap_content"></Button>
 </LinearLayout>

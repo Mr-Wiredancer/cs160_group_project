@@ -11,6 +11,10 @@
     <string name="go_garden_view_label">View my garden</string> 
     <string name="go_garden_view_title">view garden</string> 
     <string name="go_garden_view_shortcut">g</string>
+    <string name="zen_garden_button">Zen Garden</string>
+    <string name="genchi_garden_button">Genchi Garden</string>
+    <string name="help_button"> Help</string>
+    <string name="seed_market_button">Seed Market</string>
     <string name="add_new_task_label">Add new task</string>
     <string name="add_new_task_title">add new task</string>
     <string name="add_new_task_shortcut">n</string>

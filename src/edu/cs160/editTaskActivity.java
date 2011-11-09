@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -46,24 +47,27 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     	reminder.setAdapter(adapter);
     	reminder.setOnItemSelectedListener(this);
-    	
+    	((Button)findViewById(R.id.Okay)).setOnClickListener((OnClickListener)this);
     	//if task id exists, fill the fields
     	if (bundle!=null && bundle.containsKey("task_id")){
-    		fillFields(bundle.getInt("task_id"));
+    		currentTask=dbh.getTask(bundle.getInt("task_id"));
+    		fillFields();
     	}                        
     }
     
-    public void fillFields(int task_id){
-    	currentTask = dbh.getTask(task_id);
+    public void fillFields(){
+    	int task_id = currentTask.id;
     	Date dateCreated = currentTask.date_created;
     	System.out.println(dateCreated);
     	Date dateFinished = currentTask.date_finished;
     	
     	((EditText)findViewById(R.id.InputText)).setText(currentTask.title);
+    	if (dateCreated!=null){
     	((DatePicker)findViewById(R.id.datePicker)).updateDate(dateCreated.getYear()+1900, dateCreated.getMonth(), dateCreated.getDay()+6);
 
     	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentHour(dateCreated.getHours());
     	((TimePicker)findViewById(R.id.timePicker_Start)).setCurrentMinute(dateCreated.getMinutes());
+    	}
     	if (dateFinished!=null){
 	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentHour(dateFinished.getHours());
 	    	((TimePicker)findViewById(R.id.timePIcker_End)).setCurrentMinute(dateFinished.getMinutes());
@@ -124,17 +128,73 @@ public class editTaskActivity extends Activity implements OnItemSelectedListener
     	((EditText)findViewById(R.id.Tags)).setText(tagField);
     }
 
+    public void createTask(){
+    	String eventName = ((EditText)findViewById(R.id.InputText)).getText().toString(), eventDesc = ((EditText)findViewById(R.id.Description)).getText().toString();
+		DatePicker startDate = (DatePicker)findViewById(R.id.datePicker);
+//        new AlertDialog.Builder(this).setMessage("year "+startDate.getYear()+", month "+startDate.getMonth()+", day "+startDate.getDayOfMonth()).show();
+		TimePicker startTime = (TimePicker)findViewById(R.id.timePicker_Start), endTime = (TimePicker)findViewById(R.id.timePIcker_End);
+		
+		//Ignore reminder and repeat now
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		int start_month = startDate.getMonth()+1;
+		int start_year = startDate.getYear();
+		int start_day = startDate.getDayOfMonth();
+		//Have to get these from time picker
+		int start_hours;
+		int start_minutes;
+		int start_seconds;
+		int end_hours;
+		int end_minutes;
+		int end_seconds;
+		
+		Date date_started;
+		Date date_finished;
+//		try{
+//			date_started = formatter.parse((start_month>9?start_month:("0"+start_month))+"-"+((start_day>9?start_day:("0"+start_day)))+"-"+start_year+" "+(start_hours>9?start_hours:("0"+start_hours))+":"+(start_minutes>9?start_minutes:("0"+start_minutes))+":"+(start_seconds>9?start_seconds:("0"+start_seconds)));
+//		}catch(Exception e){
+//			date_started = null;
+//		}
+//		try{
+//			date_finished = formatter.parse((start_month>9?start_month:("0"+start_month))+"-"+((start_day>9?start_day:("0"+start_day)))+"-"+start_year+" "+(end_hours>9?end_hours:("0"+end_hours))+":"+(end_minutes>9?end_minutes:("0"+end_minutes))+":"+(end_seconds>9?end_seconds:("0"+end_seconds)));
+//		}catch(Exception e){
+//			date_finished = null;
+//		}
+		
+		dbh.addNewTask(eventName, eventDesc);
+	}
+    
+    public void updateTask(){
+    	String eventName = ((EditText)findViewById(R.id.InputText)).getText().toString(), eventDesc = ((EditText)findViewById(R.id.Description)).getText().toString();
+		DatePicker startDate = (DatePicker)findViewById(R.id.datePicker);
+//        new AlertDialog.Builder(this).setMessage("year "+startDate.getYear()+", month "+startDate.getMonth()+", day "+startDate.getDayOfMonth()).show();
+		TimePicker startTime = (TimePicker)findViewById(R.id.timePicker_Start), endTime = (TimePicker)findViewById(R.id.timePIcker_End);
+		
+		//Ignore reminder and repeat now
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		int start_month = startDate.getMonth()+1;
+		int start_year = startDate.getYear();
+		int start_day = startDate.getDayOfMonth();
+		Date newDateCreated = currentTask.date_created==null?new Date():currentTask.date_created;
+		Date newDateFinished = currentTask.date_finished==null?new Date():currentTask.date_finished;
+		//Date cannot change day, have to change data type later
+		newDateCreated.setYear(start_year);
+		newDateCreated.setMonth(start_month);
+		newDateFinished.setYear(start_year);
+		newDateFinished.setMonth(start_month);
+		dbh.updateTask(eventName, eventDesc, newDateCreated, newDateFinished, currentTask);
+    }
+    
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == R.id.Okay){
-			//
-			//
-			//The code that will be used to export the data
-			//
-			//
-			String eventName = ((EditText)findViewById(R.id.InputText)).getText().toString(), eventDesc = ((EditText)findViewById(R.id.Description)).toString();
-			DatePicker startDate = (DatePicker)findViewById(R.id.datePicker);		
-			TimePicker startTime = (TimePicker)findViewById(R.id.timePicker_Start), endTime = (TimePicker)findViewById(R.id.timePIcker_End);
+			if (currentTask==null){
+				createTask();
+			}else{
+				updateTask();
+			}
+			startActivity(new Intent(editTaskActivity.this, viewTasksActivity.class));
 		}
 		
 	}

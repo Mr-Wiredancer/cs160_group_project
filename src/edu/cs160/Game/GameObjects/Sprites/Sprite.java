@@ -1,9 +1,11 @@
 package edu.cs160.Game.GameObjects.Sprites;
 
 import edu.cs160.Game.GameObjects.GameObjects;
+import edu.cs160.Game.GameObjects.PaintObjects;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 public class Sprite{
@@ -16,6 +18,8 @@ private int frameMax, sequenceMax;
 private int fps;
 private long timeStamp;
 private boolean reversable, reverse = false;
+public boolean highlight = false;
+public Paint hiLiter = PaintObjects.hiLite; 
 	public Sprite(String name){
 		
 	}
@@ -73,6 +77,10 @@ private boolean reversable, reverse = false;
 	}
 	
 	public void draw(Canvas c, Resources res){
-		GameObjects.drawSprite(res,c,name,this);		
+		if(highlight){
+			c.drawRect(x, y, x+imgWidth, y+imgHeight, PaintObjects.hiLite);
+		}
+		GameObjects.drawSprite(res,c,name,this);	
+		
 	}
 }

@@ -8,7 +8,7 @@
 	        	android:layout_height="wrap_content">
 	        	
 	        <CheckBox android:layout_width="wrap_content" android:layout_height="fill_parent"></CheckBox>
-	        <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/InputText">
+	        <EditText android:layout_width="fill_parent" android:layout_height="wrap_content"  android:id="@+id/InputText">
 	            <requestFocus></requestFocus>
 	        </EditText>
 	        </LinearLayout>
@@ -48,7 +48,7 @@
 	        </LinearLayout>
 	        <TextView style="@style/smallFont" android:text="Tags" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Description_Tag"></TextView>
 	        
-	        <EditText style="@style/smallFont" android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="textPostalAddress" android:id="@+id/Tags"></EditText>
+	        <EditText style="@style/smallFont" android:layout_height="wrap_content" android:layout_width="fill_parent"  android:id="@+id/Tags"></EditText>
 	        <TextView style="@style/smallFont" android:id="@+id/OutputText" android:text="$0.00" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content"></TextView>
 	        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout5" android:layout_width="fill_parent" android:weightSum="1">
 	            <Button style="@style/smallFont" android:id="@+id/Okay" android:text="Okay" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="0.24"></Button>

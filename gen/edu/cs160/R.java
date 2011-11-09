@@ -65,15 +65,16 @@ public final class R {
         public static final int Sync=0x7f080026;
         public static final int Tags=0x7f080020;
         public static final int TextView01=0x7f080002;
-        public static final int add_new_task=0x7f08003b;
+        public static final int add_new_task=0x7f08003c;
         public static final int datePicker=0x7f080005;
         public static final int date_finished=0x7f080036;
         public static final int description=0x7f080033;
         public static final int gameGrowerScreen1=0x7f080027;
         public static final int gameMainScreen=0x7f08002c;
         public static final int genchi_garden_button=0x7f08002e;
-        public static final int go_garden_view=0x7f08003c;
-        public static final int go_task_view=0x7f080039;
+        public static final int go_garden_grower=0x7f080039;
+        public static final int go_garden_view=0x7f08003d;
+        public static final int go_task_view=0x7f08003a;
         public static final int help_button=0x7f080030;
         public static final int icon=0x7f080031;
         public static final int imageButton1=0x7f08002b;
@@ -82,7 +83,7 @@ public final class R {
         public static final int linearLayout3=0x7f080018;
         public static final int linearLayout4=0x7f080034;
         public static final int linearLayout5=0x7f080022;
-        public static final int quit=0x7f08003a;
+        public static final int quit=0x7f08003b;
         public static final int seed_market=0x7f080038;
         public static final int seed_market_button=0x7f08002f;
         public static final int task_view_root=0x7f080037;
@@ -96,10 +97,11 @@ public final class R {
         public static final int edit_task=0x7f030000;
         public static final int garden_grower=0x7f030001;
         public static final int garden_main=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int task_frame=0x7f030004;
-        public static final int task_row=0x7f030005;
-        public static final int tasks_view=0x7f030006;
+        public static final int garden_seed_market=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int task_frame=0x7f030005;
+        public static final int task_row=0x7f030006;
+        public static final int tasks_view=0x7f030007;
     }
     public static final class menu {
         public static final int main_menu=0x7f070000;

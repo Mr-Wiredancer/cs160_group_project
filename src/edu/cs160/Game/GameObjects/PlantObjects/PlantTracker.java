@@ -1,7 +1,11 @@
 package edu.cs160.Game.GameObjects.PlantObjects;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
+import edu.cs160.DatabaseDataHelper;
+import edu.cs160.PlantData;
+import edu.cs160.Game.GameObjects.DataInitializer;
 import edu.cs160.Game.GameObjects.Sprites.Sprite;
 
 public class PlantTracker {
@@ -10,8 +14,21 @@ public static HashMap<Integer,Plant> Inventory = new HashMap<Integer,Plant>();
 public static Object trackerLock = new Object();
 public static Object inventoryLock = new Object();
 public static int key = 0;
-	public static void populate(String key){
+public static int location = DataInitializer.gardenID.MAIN;
+public static DatabaseDataHelper dbh;
+	public static void populate(int key){
+		/*
+		 * Save Plants
+		 */
 		
+		/*
+		 * Load Plants
+		 */
+		
+		LinkedList<PlantData> pd =dbh.getAllPlants();		
+		if(key == DataInitializer.gardenID.MAIN){
+			
+		}
 	}
 	
 	public static void addPlant(Plant p){

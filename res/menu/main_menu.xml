@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@+id/seed_market" android:title="@string/seed_market_label" android:alphabeticShortcut="@string/seed_market_shortcut" />
+<!--@yongjin, why Grower links to seed market?  -->
+<item android:id="@+id/go_garden_grower" android:title="Grower" android:alphabeticShortcut="@string/seed_market_shortcut" />
 
 <item android:id="@+id/go_task_view" android:title="@string/go_task_view_label" android:alphabeticShortcut="@string/go_task_view_shortcut" />
 <item android:id="@+id/quit" android:title="@string/quit_label" android:alphabeticShortcut="@string/quit_shortcut" />

@@ -51,6 +51,28 @@ public class GameObjects {
 		}
 	}
 	
+	public static void draw(Resources res,Canvas c, String name, int x, int y, Rect dest){
+		if(!Data.containsKey(name)){	//If the hashmap doesn't contain the key, then there is nothing to draw
+			return;
+		}
+			
+		Rect src = new Rect();	//Create new rect for image overlays
+		Bitmap bm;								//The basic bitmap handle that will be used
+		if(Data.get(name).masked){
+			bm = Data.get(name).imageMask;													//First get the image from the resource files			
+			src.set(0,0,bm.getWidth(),bm.getHeight());										//Get the entirety of the image
+			
+			c.drawBitmap(bm, src, dest, PaintObjects.maskPaint);								//Draw the mask using the maskPaint paint Object
+			
+			bm = Data.get(name).image;														//Next get the actual image with black background
+			c.drawBitmap(bm, src, dest, PaintObjects.addPaint);								//Overlay the image using the addPaint paint Object
+		}else{
+			bm = Data.get(name).image;			
+			src.set(0,0,bm.getWidth(),bm.getHeight());										//Get the entirety of the image
+			c.drawBitmap(bm, src, dest, null);
+		}
+	}
+	
 	public static void draw(Resources res, Canvas c, String name){
 		draw(res,c,name,0,0,1,1);
 	}

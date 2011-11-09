@@ -1,5 +1,6 @@
 package edu.cs160;
 
+import edu.cs160.Game.Game_Grower;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -100,13 +101,12 @@ public class viewTasksActivity extends ListActivity {
     		startActivity(new Intent(viewTasksActivity.this, editTaskActivity.class));
     		return true;
     	} else if (id==R.id.go_garden_view) {
-            new AlertDialog.Builder(this).setMessage("go garden pressed").show();
+			startActivity(new Intent(viewTasksActivity.this, Game_Grower.class));
     		return true;
     	} else if (id==R.id.quit) {
             new AlertDialog.Builder(this).setMessage("quit pressed").show();
     		return true;
     	}
-    	
     	return super.onOptionsItemSelected(item);
     }
     

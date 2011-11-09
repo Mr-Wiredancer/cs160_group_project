@@ -16,14 +16,26 @@ import android.view.Menu; import android.view.MenuInflater; import android.view.
 import android.view.View;
 public class mainActivity extends Activity {
     /** Called when the activity is first created. */
-
+	DatabaseDataHelper dbh;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+        dbh = new DatabaseDataHelper(new DatabaseHelper(this));
 //        new AlertDialog.Builder(this).setMessage("test dialog").show();
     }    
+	
+	public void populateDatabase(){
+    	dbh.addNewRepeat(true, true, false, false, false, false, false);
+    	dbh.addNewTag("tag1");
+    	dbh.addNewReminder(1, 1, 1);
+    	dbh.addNewResource("test path");
+    	dbh.addNewTagTask(1, 1);
+    	Date date1 = new Date();
+    	date1.setYear(1991);date1.setMonth(6);date1.setDate(6);date1.setHours(6);date1.setMinutes(6);
+    	//dbh.addNewTask("task1", "This is task 1",date1, new Date(), 1, 1, 1);
+    	//dbh.addNewTask("task2", "this is task 2", new Date(), date1,1,1,1);
+    }
 	
 	public void go(View v){
 //        new AlertDialog.Builder(this).setMessage("pressed").show();

@@ -28,7 +28,7 @@ public class Game_Garden extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);	
 		DataInitializer.mainActivity= this;
-		DataInitializer.init(this);	
+		DataInitializer.init(this);			
 		DEBUGGER.debug();
 		DataInitializer.mainGarden = true;
 		setContentView(R.layout.garden_main);
@@ -38,7 +38,7 @@ public class Game_Garden extends Activity{
 		dbh = new DatabaseDataHelper(db);
       
       //this should be done when the database is created. It is now here for testing
-		populateDatabase();
+		//populateDatabase();
 
 	}
 
@@ -48,8 +48,10 @@ public class Game_Garden extends Activity{
     	dbh.addNewReminder(1, 1, 1);
     	dbh.addNewResource("test path");
     	dbh.addNewTagTask(1, 1);
-    	dbh.addNewTask("task1", "This is task 1",new Date(), new Date(), 1, 1, 1);
-    	dbh.addNewTask("task2", "this is task 2", new Date(), new Date(),1,1,1);
+    	Date date1 = new Date();
+    	date1.setYear(1991);date1.setMonth(6);date1.setDate(6);date1.setHours(6);date1.setMinutes(6);
+    	//dbh.addNewTask("task1", "This is task 1",date1, new Date(), 1, 1, 1);
+    	//dbh.addNewTask("task2", "this is task 2", new Date(), date1,1,1,1);
     }
 	
 //	@Override
@@ -81,10 +83,18 @@ public class Game_Garden extends Activity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
     	switch(item.getItemId()){
+    	case R.id.seed_market:
+    		this.startActivity(new Intent(this,Game_Seed_Market.class));
+    		return true;
+    		
+    	case R.id.go_garden_grower:
+    		this.startActivity(new Intent(this,Game_Grower.class));
+    		return true;
     	case R.id.go_task_view:
 //            new AlertDialog.Builder(this).setMessage("go task pressed").show();
     		Game_Garden.this.startActivity(new Intent(Game_Garden.this, viewTasksActivity.class));
     		return true;
+    		
     	case R.id.quit:
             new AlertDialog.Builder(this).setMessage("quit pressed").show();
     		return true;

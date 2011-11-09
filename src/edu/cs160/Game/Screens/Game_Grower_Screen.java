@@ -86,8 +86,10 @@ public class Game_Grower_Screen extends Screen{
 				else
 					selection = PlantTracker.getClosestInventoryPlant((int)x, (int)y);
 				System.out.println(selection);
-				if(selection!=null)
-				DataInitializer.mainActivity.runOnUiThread(new Updater_Grower(selection));
+				if(selection!=null){
+					selection.sprite.highlight=true;
+					DataInitializer.mainActivity.runOnUiThread(new Updater_Grower(selection));
+				}
 			}else if(e.getAction() == MotionEvent.ACTION_MOVE){
 				if(selection!=null){
 					selection.sprite.setPosCenter((int)x,(int) y);
@@ -97,6 +99,8 @@ public class Game_Grower_Screen extends Screen{
 					}
 				}
 			}else if (e.getAction() == MotionEvent.ACTION_UP){
+				if(selection!=null)
+					selection.sprite.highlight=false;
 				selection = null;
 			}
 		}

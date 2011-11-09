@@ -132,6 +132,30 @@ public class DatabaseDataHelper {
 		dbw.insert("tasks", null, cv);
 	}
 	
+	public void addNewTask(String title, String description){
+		ContentValues cv = new ContentValues();
+		cv.put("title", title);
+		cv.put("description", description);
+		
+		//time and date are hard-coded now, because having problem reading the widgets
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		cv.put("date_time_created", formatter.format(new Date()));
+		System.out.println(formatter.format(new Date()));
+		cv.put("date_time_finished", formatter.format(new Date()));
+		
+		dbw.insert("tasks", null,cv);
+	}
+	
+	public void updateTask(String newTitle, String newDescription, Date new_date_started, Date new_date_finished, Task oldTask){
+		ContentValues cv = new ContentValues();
+		cv.put("title", newTitle);
+		cv.put("description", newDescription);
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
+		cv.put("date_time_started", formatter.format(new_date_started));
+		cv.put("date_time_finished", formatter.format(new_date_finished));
+		dbw.update("tasks", cv, "id="+oldTask.id, null);
+		
+	}	
 	/**
 	 * add new entry to resrouces table
 	 * @param path
@@ -251,37 +275,45 @@ public class DatabaseDataHelper {
 		Cursor c = dbr.rawQuery("SELECT * FROM tasks WHERE id="+task_id+";", null);
 		c.moveToNext();
 		String title = c.getString(1);
+		System.out.println(title);
 		String description = c.getString(2);
+		System.out.println(description);
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss",Locale.US);
 		
 		Date date_time_created = null;
 		Date date_time_started = null;
+		
 		Date date_time_finished = null;
-		try{
-			date_time_created = formatter.parse(c.getString(3));
-		}catch(ParseException e){
-			System.out.println("date_created parse error");
-			date_time_created = null;
-		}
-		try{
-			date_time_started = formatter.parse(c.getString(4));
-		}catch(ParseException e){
-			System.out.println("date_created parse error");
-			date_time_started = null;
-		}
-		try{
-			if (c.getString(4)!=null){
-				date_time_finished = formatter.parse(c.getString(5));
-			}
-		}catch(ParseException e){
-			System.out.println("date_finished parse error");
-			date_time_finished = null;
-		}
-			
-		int repeat_id = c.getInt(6);
-		int reminder_id = c.getInt(7);
-		int resource_id = c.getInt(8);	
-		int completed = c.getInt(9);
+//		try{
+//			date_time_created = formatter.parse(c.getString(3));
+//		}catch(Exception e){
+//			System.out.println("date_created parse error");
+//			date_time_created = null;
+//		}
+//		
+//		try{
+//			date_time_started = formatter.parse(c.getString(4));
+//		}catch(Exception e){
+//			System.out.println("date_created parse error");
+//			date_time_started = null;
+//		}
+//		try{
+//			if (c.getString(4)!=null){
+//				date_time_finished = formatter.parse(c.getString(5));
+//			}
+//		}catch(ParseException e){
+//			System.out.println("date_finished parse error");
+//			date_time_finished = null;
+//		}
+//			
+//		int repeat_id = c.getInt(6);
+//		int reminder_id = c.getInt(7);
+//		int resource_id = c.getInt(8);	
+//		int completed = c.getInt(9);
+		int repeat_id = 1;
+		int reminder_id = 1;
+		int resource_id = 1;	
+		int completed = 0;
 		return new Task(task_id, title, description, date_time_created, date_time_started, date_time_finished, getRepeat(repeat_id), getReminder(reminder_id), getTagsForTask(task_id), resource_id, completed);
 	}
 	
@@ -291,9 +323,13 @@ public class DatabaseDataHelper {
 	 * @return
 	 */
 	public Repeat getRepeat(int repeat_id){
-		Cursor c = dbr.rawQuery("SELECT * FROM repeats WHERE id="+repeat_id+";", null);
-		c.moveToNext();
-		return new Repeat(repeat_id, c.getString(1));
+		
+		//hard-coded
+		return new Repeat(1,"1100000");
+		
+//		Cursor c = dbr.rawQuery("SELECT * FROM repeats WHERE id="+repeat_id+";", null);
+//		c.moveToNext();
+//		return new Repeat(repeat_id, c.getString(1));
 	}
 	
 	/**
@@ -302,9 +338,10 @@ public class DatabaseDataHelper {
 	 * @return a reminder object
 	 */
 	public Reminder getReminder(int reminder_id){
-		Cursor c = dbr.rawQuery("SELECT * FROM reminders WHERE id="+reminder_id+";", null);
-		c.moveToNext();
-		return new Reminder(reminder_id, c.getInt(1), c.getInt(2), c.getInt(3));
+		return new Reminder(1,1,1,1);
+//		Cursor c = dbr.rawQuery("SELECT * FROM reminders WHERE id="+reminder_id+";", null);
+//		c.moveToNext();
+//		return new Reminder(reminder_id, c.getInt(1), c.getInt(2), c.getInt(3));
 	}
 	
 	/**
@@ -359,11 +396,11 @@ public class DatabaseDataHelper {
 	 * Get all the plants
 	 * @return a list of plants
 	 */
-	public LinkedList<Plant> getAllPlants(){
+	public LinkedList<PlantData> getAllPlants(){
 		Cursor c=dbr.rawQuery("SELECT * FROM plants;", null);
-		LinkedList<Plant> plants = new LinkedList<Plant>();
+		LinkedList<PlantData> plants = new LinkedList<PlantData>();
 		while(c.moveToNext()){
-			plants.add(new Plant(c.getInt(0),c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5), c.getInt(6), c.getInt(7)));
+			plants.add(new PlantData(c.getInt(0),c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5), c.getInt(6), c.getInt(7)));
 		}
 		c.close();
 		return plants;

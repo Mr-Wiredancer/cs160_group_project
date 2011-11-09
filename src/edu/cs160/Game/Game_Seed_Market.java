@@ -15,14 +15,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class Game_Grower extends Activity{
+public class Game_Seed_Market extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		DataInitializer.mainActivity = this;
 		DataInitializer.init(this);
 		DEBUGGER.debug();
 //		DEBUGGER.debug();
-		setContentView(R.layout.garden_grower);
+		setContentView(R.layout.garden_seed_market);
 		//setContentView(new Game_Grower_Screen(this));
 	}
 	
@@ -39,7 +39,7 @@ public class Game_Grower extends Activity{
     	switch(item.getItemId()){
     	case R.id.go_task_view:
 //            new AlertDialog.Builder(this).setMessage("go task pressed").show();
-    		Game_Grower.this.startActivity(new Intent(Game_Grower.this, viewTasksActivity.class));
+    		Game_Seed_Market.this.startActivity(new Intent(Game_Seed_Market.this, viewTasksActivity.class));
     		return true;
 //    	case R.id.g:
 ////          new AlertDialog.Builder(this).setMessage("go task pressed").show();

@@ -1,5 +1,7 @@
 package edu.cs160.Game.GameObjects;
 
+import edu.cs160.DatabaseDataHelper;
+import edu.cs160.DatabaseHelper;
 import edu.cs160.R;
 import android.app.Activity;
 import android.content.Context;
@@ -7,11 +9,20 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 
 public class DataInitializer {
+	public static boolean ranOnce = false;
 	public static Boolean mainGarden = true;
 	public static Boolean GardenGrower = true;
 	public static Activity mainActivity;
 	public static int invHeight = 200;
+	public static DatabaseHelper db;
+	public static DatabaseDataHelper dbh;
 public static void init(Context c){
+	if(ranOnce){
+		return;
+	}
+	db = new DatabaseHelper(c);
+	dbh = new DatabaseDataHelper(db);
+	ranOnce = true;
 	PaintObjects.init();
 	GameObjects.addData("Pot", BitmapFactory.decodeResource(c.getResources(), R.drawable.misc_pot),R.drawable.misc_pot);
 	GameObjects.addData("Pot_Small", BitmapFactory.decodeResource(c.getResources(), R.drawable.misc_pot_small), R.drawable.misc_pot_small);
@@ -36,5 +47,12 @@ public static final class flowerID{
 	public static final int BLUE_ROSE = 1;
 	public static final int CAMELLIA = 2;
 	public static final int FORGETMENOT = 3;
+}
+
+public static final class gardenID{
+	public static final int BACKPACK = -1;
+	public static final int MAIN = 0;
+	public static final int GROWER = 1;
+	
 }
 }

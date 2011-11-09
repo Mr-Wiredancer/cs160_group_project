@@ -13,8 +13,7 @@ public class Screen extends SurfaceView implements SurfaceHolder.Callback{
 	public Screen(Context context) {
 		super(context);
 		setFocusable(true);
-		getHolder().addCallback(this);
-		dThread = new DrawThread(getHolder(),this);
+		getHolder().addCallback(this);		
 		
 	}
 	
@@ -48,6 +47,7 @@ public class Screen extends SurfaceView implements SurfaceHolder.Callback{
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
+		dThread = new DrawThread(getHolder(),this);
 		dThread.setRunning(true);
 		dThread.start();
 

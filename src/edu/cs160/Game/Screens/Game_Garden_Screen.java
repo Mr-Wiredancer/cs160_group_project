@@ -75,9 +75,12 @@ public class Game_Garden_Screen extends Screen {
 			if(e.getAction()== MotionEvent.ACTION_DOWN){
 				if(y<getHeight()-DataInitializer.invHeight)
 					selection = PlantTracker.getClosestPlant((int)x, (int)y);
-				else
-					
-						selection = PlantTracker.getClosestInventoryPlant((int)x, (int)y);
+				else					
+					selection = PlantTracker.getClosestInventoryPlant((int)x, (int)y);
+				
+				if(selection!=null){
+					selection.sprite.highlight = true;
+				}
 			}else if(e.getAction() == MotionEvent.ACTION_MOVE){
 				if(selection!=null){
 					selection.sprite.setPosCenter((int)x,(int) y);
@@ -90,6 +93,8 @@ public class Game_Garden_Screen extends Screen {
 					}
 				}
 			}else if (e.getAction() == MotionEvent.ACTION_UP){
+				if(selection!=null)
+					selection.sprite.highlight=false;
 				selection = null;
 			}
 		}
